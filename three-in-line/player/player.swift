@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Player {
+struct Player {
     
     var name: String,
     points: Array<Int>,

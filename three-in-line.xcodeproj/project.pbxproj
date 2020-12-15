@@ -18,6 +18,8 @@
 		43999720258976980089BFC2 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399971F258976980089BFC2 /* GameSettings.swift */; };
 		43999728258978C40089BFC2 /* Gaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43999727258978C40089BFC2 /* Gaming.swift */; };
 		4399973425897D2C0089BFC2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399973325897D2C0089BFC2 /* Player.swift */; };
+		4399973925897FCC0089BFC2 /* NameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399973825897FCC0089BFC2 /* NameInputViewController.swift */; };
+		4399973E25897FF60089BFC2 /* RoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399973D25897FF60089BFC2 /* RoundsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		4399971F258976980089BFC2 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		43999727258978C40089BFC2 /* Gaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gaming.swift; sourceTree = "<group>"; };
 		4399973325897D2C0089BFC2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		4399973825897FCC0089BFC2 /* NameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameInputViewController.swift; sourceTree = "<group>"; };
+		4399973D25897FF60089BFC2 /* RoundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				439996E6258970260089BFC2 /* ViewController.swift */,
+				4399973825897FCC0089BFC2 /* NameInputViewController.swift */,
+				4399973D25897FF60089BFC2 /* RoundsViewController.swift */,
 			);
 			path = viewcontrollers;
 			sourceTree = "<group>";
@@ -297,6 +303,8 @@
 				439996E3258970260089BFC2 /* AppDelegate.swift in Sources */,
 				4399973425897D2C0089BFC2 /* Player.swift in Sources */,
 				439996E5258970260089BFC2 /* SceneDelegate.swift in Sources */,
+				4399973925897FCC0089BFC2 /* NameInputViewController.swift in Sources */,
+				4399973E25897FF60089BFC2 /* RoundsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
