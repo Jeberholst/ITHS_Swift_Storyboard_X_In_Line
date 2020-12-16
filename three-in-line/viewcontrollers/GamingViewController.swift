@@ -27,9 +27,10 @@ class GamingViewController: UIViewController {
         for item in squaresList {
             let lbl = UILabel()
             lbl.tag = (item.index)
-            lbl.text = "Square \(item.index)"
+            lbl.text = "Square \(item.squareVal)"
             
-            print("Adding view.. text: \(String(describing: lbl.text)) tag: \(lbl.tag)")
+            print("Adding view..text: \(String(describing: lbl.text)) tag: \(lbl.tag)")
+            
         
             //ADDVIEW
             	

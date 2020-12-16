@@ -21,7 +21,7 @@ class Squares {
         let squaresToAdd = (1...amount)
         
         squaresToAdd.forEach { i in
-            let sq = Square(index: i, checked: false)
+            let sq = Square(index: i, checked: false, finalized: false)
             print(sq)
             addASquare(square: sq)
         }
