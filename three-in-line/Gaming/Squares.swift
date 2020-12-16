@@ -9,11 +9,12 @@ import Foundation
 
 class Squares {
     private var list: [Square]
+    let totSquares = 9
     
     init() {
         list = [Square]()
         //TODO: ADD AS INPUT VARIABLE?
-        addInitialSquares(amount: 9)
+        addInitialSquares(amount: totSquares)
     }
     
     private func addInitialSquares(amount: Int){
@@ -33,6 +34,10 @@ class Squares {
     
     func getList() -> [Square] {
         return list
+    }
+    
+    func calcWinningSquares(){
+        // TODO: Return Array of Array with possible wining lines?
     }
     
 }

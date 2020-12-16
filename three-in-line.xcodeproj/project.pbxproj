@@ -21,6 +21,7 @@
 		4399973925897FCC0089BFC2 /* GamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399973825897FCC0089BFC2 /* GamingViewController.swift */; };
 		43A00F06258AB097005ACBC6 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A00F05258AB097005ACBC6 /* Square.swift */; };
 		43A00F0B258AB0B8005ACBC6 /* Squares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A00F0A258AB0B8005ACBC6 /* Squares.swift */; };
+		43A00F10258AB738005ACBC6 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A00F0F258AB738005ACBC6 /* Players.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		4399973825897FCC0089BFC2 /* GamingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamingViewController.swift; sourceTree = "<group>"; };
 		43A00F05258AB097005ACBC6 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		43A00F0A258AB0B8005ACBC6 /* Squares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squares.swift; sourceTree = "<group>"; };
+		43A00F0F258AB738005ACBC6 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				4399973325897D2C0089BFC2 /* Player.swift */,
+				43A00F0F258AB738005ACBC6 /* Players.swift */,
 			);
 			path = player;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				439996E7258970260089BFC2 /* ViewController.swift in Sources */,
 				43999720258976980089BFC2 /* GameSettings.swift in Sources */,
 				439996E3258970260089BFC2 /* AppDelegate.swift in Sources */,
+				43A00F10258AB738005ACBC6 /* Players.swift in Sources */,
 				4399973425897D2C0089BFC2 /* Player.swift in Sources */,
 				439996E5258970260089BFC2 /* SceneDelegate.swift in Sources */,
 				4399973925897FCC0089BFC2 /* GamingViewController.swift in Sources */,

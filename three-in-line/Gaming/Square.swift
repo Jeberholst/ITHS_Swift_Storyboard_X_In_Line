@@ -10,4 +10,9 @@ import Foundation
 struct Square {
     var index: Int
     var checked: Bool
+    
+    func isValid() -> Bool {
+        print(checked)
+        return checked
+    }
 }

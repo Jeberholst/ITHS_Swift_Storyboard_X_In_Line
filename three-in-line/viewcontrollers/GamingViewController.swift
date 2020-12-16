@@ -18,7 +18,6 @@ class GamingViewController: UIViewController {
         
         createViews()
         
-        
     }
     
     func createViews(){
@@ -30,8 +29,8 @@ class GamingViewController: UIViewController {
             lbl.tag = (item.index)
             lbl.text = "Square \(item.index)"
             
-            print("Adding view")
-            
+            print("Adding view.. text: \(String(describing: lbl.text)) tag: \(lbl.tag)")
+        
             //ADDVIEW
             	
         }
