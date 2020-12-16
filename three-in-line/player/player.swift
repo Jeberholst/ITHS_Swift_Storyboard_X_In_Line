@@ -18,7 +18,6 @@ struct Player {
         self.name = name
         self.points = points
         self.round = round
-    
     }
     
     func totalScore() -> Int {

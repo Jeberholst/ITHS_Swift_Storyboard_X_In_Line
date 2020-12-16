@@ -11,6 +11,7 @@ class GameSettings {
     
     var listOfPlayers = Array<Player>()
     var rounds = 0
+    var squares = (3 * 3)
     
     func addPlayersToList(player: Player){
         listOfPlayers.append(player)
@@ -23,6 +24,7 @@ class GameSettings {
     func addComputerBot(){
         
     }
+    
     
 
     
