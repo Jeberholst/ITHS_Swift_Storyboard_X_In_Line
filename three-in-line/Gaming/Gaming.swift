@@ -17,9 +17,4 @@ class Gaming {
         
     }
     
-    func isValidSquare() -> Bool {
-        //TODO STATEMENT
-        return true
-    }
-    
 }

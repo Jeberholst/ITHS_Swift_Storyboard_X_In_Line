@@ -40,15 +40,32 @@ class Squares {
         return list
     }
     
+    func getSquare(index: Int) -> Square {
+        return list[index-1]
+    }
+    
+    func isCheckBoardFull() -> Bool {
+        var count = 0
+        for item in list {
+            if(item.finalized){
+                count += 1
+            }
+        }
+        if count == list.count {
+            return true
+        }
+        return false
+    }
+    
     func calcWinningSquares(){
- 
+        
+        
     }
     
     func calcWinLines(){
         
             var arrHorizontal = [[Int]]()
             var diagonalArr = [[Int]]()
-            //var squareValue = 0
             
             for ind in stride(from: 1, to: totSquares, by: columns){
                 
@@ -60,7 +77,6 @@ class Squares {
                 arrHorizontal.append(hArr)
             }
              
-            
             var arrVertical = [[Int]]()
             
             for ind in (0...columns-1) {
@@ -79,12 +95,12 @@ class Squares {
         
             diagonalArr.append(dArr)
             
-            let rev = arrVertical.reversed()
+            let rev = arrVertical.reversed() as Array
             print(rev)
             
             var dArr2 = [Int]()
             for i in 1...columns {
-              //  dArr2.append(rev[i-1][i-1])
+                dArr2.append(rev[i-1][i-1])
             }
             diagonalArr.append(dArr2)
              

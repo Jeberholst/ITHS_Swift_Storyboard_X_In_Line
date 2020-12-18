@@ -15,13 +15,11 @@ class GamingViewController: UIViewController {
     var yx = 0
     let vhheight = 50
     let squareSize = 50
-    
-    
     var selSquare: Square? = nil
+    let squareList = Squares().getList()
     
     @IBOutlet weak var gridView: UIView!
    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,10 +30,9 @@ class GamingViewController: UIViewController {
     
     func createViews(){
 
-        let squaresList = squares.getList()
         let cols = squares.columns
         
-        for item in squaresList {
+        for item in squareList {
             
             let labelToAdd = createUIsquare(item: item)
 
@@ -58,11 +55,28 @@ class GamingViewController: UIViewController {
             guard let viewTag = sender.view?.tag else { return }
             print(viewTag)
             
+            selSquare = squares.getSquare(index: viewTag)
             
-            print("\(sender.view?.tag ?? 0)")
+            guard let selSquare = selSquare else { return }
+            
+            selSquare.setChecked()
+            
+            let targetLbl = self.view.viewWithTag(viewTag) as? UILabel
+            
+            targetLbl?.text = selSquare.squareVal.rawValue
+            
+            //TODO MOVE TO BTN CLICK
+                finalizeSquare()
+                //selSquare.setFinalized()
+                print("Square Finalized: \(selSquare.finalized)")
+            //CHECK AFTER EACH PLACEMENT
+                print("CheckBoard Full: \(squares.isCheckBoardFull())")
 
-            
         }
+    }
+    
+    func finalizeSquare(){
+        selSquare?.setFinalized()
     }
     
     func createUIsquare(item: Square) -> UILabel {
@@ -71,14 +85,15 @@ class GamingViewController: UIViewController {
         
         lbl.frame = CGRect(x: xy, y: yx, width: vhheight, height: vhheight)
         lbl.tag = (item.index)
-        lbl.text = "\(item.squareVal)"
+        lbl.text = "\(item.squareVal.rawValue)"
         lbl.textAlignment = .center
         lbl.font.withSize(22)
-        lbl.backgroundColor = .darkGray
         lbl.isUserInteractionEnabled = true
+        lbl.layer.borderColor = UIColor.gray.cgColor
+        lbl.layer.borderWidth = 1
+        lbl.layer.cornerRadius = 5
         
         let sTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTap))
-       // sTap.setValue(item, forKey: "item")
         
         lbl.addGestureRecognizer(sTap)
         
@@ -87,6 +102,5 @@ class GamingViewController: UIViewController {
         return lbl
     }
     
-   
 
 }
