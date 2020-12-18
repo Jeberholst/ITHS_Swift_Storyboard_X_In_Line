@@ -57,9 +57,19 @@ class Squares {
         return false
     }
     
+    //TODO : CALCULATE SOMEHOW VIA ARRAYS
     func calcWinningSquares(){
         
         
+    }
+    
+    //TODO : BOARD RESET LIST TO DEFAULT LOOP/CLEAR?
+    func resetBoard(){
+        list.forEach{ item in
+            item.checked = false
+            item.finalized = false
+            item.squareVal = .EMPTY
+        }
     }
     
     func calcWinLines(){
@@ -108,6 +118,5 @@ class Squares {
             print("VerticalArr: \(arrVertical)")
             print("DiagonalArr: \(diagonalArr)")
         }
-    
     
 }

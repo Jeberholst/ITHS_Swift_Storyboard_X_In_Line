@@ -71,12 +71,23 @@ class GamingViewController: UIViewController {
                 print("Square Finalized: \(selSquare.finalized)")
             //CHECK AFTER EACH PLACEMENT
                 print("CheckBoard Full: \(squares.isCheckBoardFull())")
+            if(squares.isCheckBoardFull()){
+                squares.resetBoard()
+                resetLabelSquares()
+            }
 
         }
     }
     
     func finalizeSquare(){
         selSquare?.setFinalized()
+    }
+    
+    func resetLabelSquares(){
+        for item in squares.getList() {
+            let findLbl = self.view.viewWithTag(item.index) as? UILabel
+            findLbl?.text = item.squareVal.rawValue
+        }
     }
     
     func createUIsquare(item: Square) -> UILabel {
