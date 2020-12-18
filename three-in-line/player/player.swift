@@ -9,20 +9,33 @@ import Foundation
 
 struct Player {
     
-    var name: String,
-    points: Array<Int>,
-    round: Array<Int>,
-    isComputerBot: Bool = false
+    var name: String
+    var points: [Int]
+    var rounds: [Int]
+    var isComputerBot: Bool = false
     
-    init(name: String, points: Array<Int>, round: Array<Int>) {
+    init(name: String, points: Array<Int>, rounds: Array<Int>) {
         self.name = name
         self.points = points
-        self.round = round
+        self.rounds = rounds
     }
     
-    func totalScore() -> Int {
-        //TODO : Write function
+    func totalScorBe() -> Int {
+        //TODO : Sum points array
+       // var total = list.map({$0.points}).reduce(0, +)
+        //total from list with specific element
+        
+        //let total = points.red(into: 0, 1)
         return 0
+    }
+    
+    mutating func addPointAndCurrRound(point: Int, currRound: Int){
+        points.append(point)
+        rounds.append(currRound)
+    }
+    
+    func scoreList(){
+        
     }
     
 }

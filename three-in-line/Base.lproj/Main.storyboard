@@ -87,10 +87,25 @@
                     <view key="view" contentMode="scaleToFill" id="1yS-x7-JnP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJB-dv-Apd">
+                                <rect key="frame" x="57" y="298" width="300" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="pQD-pe-4ab"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RJB-dv-Apd" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="57" id="KPW-s4-JBJ"/>
+                            <constraint firstItem="pQD-pe-4ab" firstAttribute="trailing" secondItem="RJB-dv-Apd" secondAttribute="trailing" constant="57" id="KaJ-IL-1mv"/>
+                            <constraint firstItem="RJB-dv-Apd" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="210" id="e4O-0e-fO8"/>
+                            <constraint firstItem="pQD-pe-4ab" firstAttribute="bottom" secondItem="RJB-dv-Apd" secondAttribute="bottom" constant="215" id="wOa-IV-n41"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="1 VS 1" id="bRN-Zg-yr3"/>
+                    <connections>
+                        <outlet property="gridView" destination="RJB-dv-Apd" id="iTk-gk-4F6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1lr-Kh-QLY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -103,14 +118,26 @@
                     <view key="view" contentMode="scaleToFill" id="LOh-gZ-dVr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uXN-Bk-ttp">
+                                <rect key="frame" x="57" y="257" width="300" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Hsh-qv-DW9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Hsh-qv-DW9" firstAttribute="trailing" secondItem="uXN-Bk-ttp" secondAttribute="trailing" constant="57" id="9b4-UZ-AJK"/>
+                            <constraint firstItem="uXN-Bk-ttp" firstAttribute="top" secondItem="Hsh-qv-DW9" secondAttribute="top" constant="169" id="PZ5-jM-az9"/>
+                            <constraint firstItem="Hsh-qv-DW9" firstAttribute="bottom" secondItem="uXN-Bk-ttp" secondAttribute="bottom" constant="256" id="SRT-qI-LLZ"/>
+                            <constraint firstItem="uXN-Bk-ttp" firstAttribute="leading" secondItem="Hsh-qv-DW9" secondAttribute="leading" constant="57" id="eyk-B9-v6r"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="1 vs Computer" id="kMd-Fp-gdl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jwx-bU-2qd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="419" y="245"/>
+            <point key="canvasLocation" x="418.84057971014494" y="244.41964285714283"/>
         </scene>
     </scenes>
     <resources>

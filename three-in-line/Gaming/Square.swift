@@ -8,6 +8,7 @@
 import Foundation
 
 struct Square {
+    
     var index: Int
     var checked: Bool
     var finalized: Bool

@@ -8,12 +8,17 @@
 import Foundation
 
 class Squares {
+    
     private var list: [Square]
+    
+    //TODO: ADD AS INPUT VARIABLE?
+    var columns = 3
+    var rows = 3
     let totSquares = 9
     
     init() {
         list = [Square]()
-        //TODO: ADD AS INPUT VARIABLE?
+        
         addInitialSquares(amount: totSquares)
     }
     
@@ -25,7 +30,6 @@ class Squares {
             print(sq)
             addASquare(square: sq)
         }
-        
     }
     
     func addASquare(square: Square){
@@ -37,7 +41,57 @@ class Squares {
     }
     
     func calcWinningSquares(){
-        // TODO: Return Array of Array with possible wining lines?
+ 
     }
+    
+    func calcWinLines(){
+        
+            var arrHorizontal = [[Int]]()
+            var diagonalArr = [[Int]]()
+            //var squareValue = 0
+            
+            for ind in stride(from: 1, to: totSquares, by: columns){
+                
+                var hArr = [Int]()
+                
+                for addIndex in ind...(ind + columns)-1 {
+                    hArr.append(addIndex)
+                }
+                arrHorizontal.append(hArr)
+            }
+             
+            
+            var arrVertical = [[Int]]()
+            
+            for ind in (0...columns-1) {
+                var vArr = [Int]()
+                for sArr in arrHorizontal{
+        
+                     vArr.append(sArr[ind])
+                }
+                arrVertical.append(vArr)
+            }
+           
+            var dArr = [Int]()
+            for i in 1...columns {
+                dArr.append(arrHorizontal[i-1][i-1])
+            }
+        
+            diagonalArr.append(dArr)
+            
+            let rev = arrVertical.reversed()
+            print(rev)
+            
+            var dArr2 = [Int]()
+            for i in 1...columns {
+              //  dArr2.append(rev[i-1][i-1])
+            }
+            diagonalArr.append(dArr2)
+             
+            print("HorizontalArr: \(arrHorizontal)")
+            print("VerticalArr: \(arrVertical)")
+            print("DiagonalArr: \(diagonalArr)")
+        }
+    
     
 }
