@@ -16,6 +16,8 @@ class Squares {
     var rows = 3
     let totSquares = 9
     
+    var winningLines = [[Int]]()
+    
     init() {
         list = [Square]()
         
@@ -57,13 +59,6 @@ class Squares {
         return false
     }
     
-    //TODO : CALCULATE SOMEHOW VIA ARRAYS
-    func calcWinningSquares(){
-        
-        
-    }
-    
-    //TODO : BOARD RESET LIST TO DEFAULT LOOP/CLEAR?
     func resetBoard(){
         list.forEach{ item in
             item.checked = false
@@ -84,6 +79,7 @@ class Squares {
                 for addIndex in ind...(ind + columns)-1 {
                     hArr.append(addIndex)
                 }
+                winningLines.append(hArr)
                 arrHorizontal.append(hArr)
             }
              
@@ -95,6 +91,7 @@ class Squares {
         
                      vArr.append(sArr[ind])
                 }
+                winningLines.append(vArr)
                 arrVertical.append(vArr)
             }
            
@@ -106,17 +103,24 @@ class Squares {
             diagonalArr.append(dArr)
             
             let rev = arrVertical.reversed() as Array
-            print(rev)
+            //print(rev)
             
             var dArr2 = [Int]()
             for i in 1...columns {
                 dArr2.append(rev[i-1][i-1])
             }
             diagonalArr.append(dArr2)
+        
+            
+            winningLines.append(dArr)
+            winningLines.append(dArr2)
+        
+        
+            print(winningLines)
              
-            print("HorizontalArr: \(arrHorizontal)")
-            print("VerticalArr: \(arrVertical)")
-            print("DiagonalArr: \(diagonalArr)")
+//            print("HorizontalArr: \(arrHorizontal)")
+//            print("VerticalArr: \(arrVertical)")
+//            print("DiagonalArr: \(diagonalArr)")
         }
     
 }

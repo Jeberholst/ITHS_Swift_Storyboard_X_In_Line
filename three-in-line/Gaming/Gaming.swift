@@ -9,6 +9,7 @@ import Foundation
 
 class Gaming {
     
+    
     func checkWinnerOrDraw(){
         //listOfPlayers loop
     }
@@ -16,5 +17,10 @@ class Gaming {
     func turnCheckIfWin(){
         
     }
+    
+    func setCurrentPlayers(){
+       
+    }
+    
     
 }

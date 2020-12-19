@@ -12,12 +12,14 @@ struct Player {
     var name: String
     var points: [Int]
     var rounds: [Int]
+    var marker: String
     var isComputerBot: Bool = false
     
-    init(name: String, points: Array<Int>, rounds: Array<Int>) {
+    init(name: String, points: Array<Int>, rounds: Array<Int>, marker: String) {
         self.name = name
         self.points = points
         self.rounds = rounds
+        self.marker = marker
     }
     
     func totalScorBe() -> Int {

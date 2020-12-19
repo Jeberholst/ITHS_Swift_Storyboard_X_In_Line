@@ -10,7 +10,8 @@ import UIKit
 class GamingViewController: UIViewController {
 
     var squares = Squares()
-    
+    let players = Players()
+
     var xy = 0
     var yx = 0
     let vhheight = 50
@@ -23,9 +24,24 @@ class GamingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addPlayers()
+        
         createViews()
         squares.calcWinLines()
         
+    }
+    
+    func addPlayers(){
+        
+        let player1 = Player(name: "Jocke", points: [Int](), rounds: [Int](), marker: "X")
+        let player2 = Player(name: "Anon", points: [Int](), rounds: [Int](), marker: "O")
+        
+        players.addPlayer(player: player1)
+        players.addPlayer(player: player2)
+        
+        for player in players.getList() {
+            print(player)
+        }
     }
     
     func createViews(){
@@ -48,36 +64,7 @@ class GamingViewController: UIViewController {
         }
 
     }
-    
-    @objc func didTap(sender: UITapGestureRecognizer){
-        if sender.state == .ended {
-            
-            guard let viewTag = sender.view?.tag else { return }
-            print(viewTag)
-            
-            selSquare = squares.getSquare(index: viewTag)
-            
-            guard let selSquare = selSquare else { return }
-            
-            selSquare.setChecked()
-            
-            let targetLbl = self.view.viewWithTag(viewTag) as? UILabel
-            
-            targetLbl?.text = selSquare.squareVal.rawValue
-            
-            //TODO MOVE TO BTN CLICK
-                finalizeSquare()
-                //selSquare.setFinalized()
-                print("Square Finalized: \(selSquare.finalized)")
-            //CHECK AFTER EACH PLACEMENT
-                print("CheckBoard Full: \(squares.isCheckBoardFull())")
-            if(squares.isCheckBoardFull()){
-                squares.resetBoard()
-                resetLabelSquares()
-            }
 
-        }
-    }
     
     func finalizeSquare(){
         selSquare?.setFinalized()
@@ -113,5 +100,37 @@ class GamingViewController: UIViewController {
         return lbl
     }
     
+    
+    @objc func didTap(sender: UITapGestureRecognizer){
+        if sender.state == .ended {
+            
+            guard let viewTag = sender.view?.tag else { return }
+            print(viewTag)
+            
+            selSquare = squares.getSquare(index: viewTag)
+            
+            guard let selSquare = selSquare else { return }
+            
+            selSquare.setChecked()
+            
+            let targetLbl = self.view.viewWithTag(viewTag) as? UILabel
+            
+            targetLbl?.text = selSquare.squareVal.rawValue
+            
+            //TODO MOVE TO BTN CLICK
+                finalizeSquare()
+                //selSquare.setFinalized()
+                print("Square Finalized: \(selSquare.finalized)")
+            //CHECK AFTER EACH PLACEMENT
+                print("CheckBoard Full: \(squares.isCheckBoardFull())")
+            squares.calcWinningSquares()
+            
+            if(squares.isCheckBoardFull()){
+                squares.resetBoard()
+                resetLabelSquares()
+            }
 
+        }
+    }
+    
 }
