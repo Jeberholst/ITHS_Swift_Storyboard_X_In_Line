@@ -25,7 +25,7 @@ class Square {
         finalized = true
     }
     
-    func setChecked(){
+    func setChecked(playerMark: SquareVal){
        
         guard !finalized else { return }
         //guard squareVal == .EMPTY else { return }
@@ -35,7 +35,7 @@ class Square {
             squareVal = SquareVal.EMPTY
         } else {
             checked = true
-            squareVal = SquareVal.X
+            squareVal = playerMark
         }
         
         print("Finalized: \(finalized)")

@@ -10,7 +10,8 @@ import UIKit
 class GamingViewController: UIViewController {
 
     var squares = Squares()
-    let players = Players()
+    var players = Players()
+    var currentPlayer: Player? = nil
 
     var xy = 0
     var yx = 0
@@ -19,12 +20,16 @@ class GamingViewController: UIViewController {
     var selSquare: Square? = nil
     let squareList = Squares().getList()
     
+    var turn = 0
+    
     @IBOutlet weak var gridView: UIView!
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addPlayers()
+        
+        changeTurn()
         
         createViews()
         squares.calcWinLines()
@@ -33,15 +38,14 @@ class GamingViewController: UIViewController {
     
     func addPlayers(){
         
-        let player1 = Player(name: "Jocke", points: [Int](), rounds: [Int](), marker: "X")
-        let player2 = Player(name: "Anon", points: [Int](), rounds: [Int](), marker: "O")
+        let player1 = Player(name: "Jocke", points: [Int](), rounds: [Int](), marker: SquareVal.X)
+        let player2 = Player(name: "Anon", points: [Int](), rounds: [Int](), marker: SquareVal.O)
         
         players.addPlayer(player: player1)
         players.addPlayer(player: player2)
         
-        for player in players.getList() {
-            print(player)
-        }
+        players.setResetAllSelections(count: squares.totSquares)
+        
     }
     
     func createViews(){
@@ -95,7 +99,7 @@ class GamingViewController: UIViewController {
         
         lbl.addGestureRecognizer(sTap)
         
-        print("Adding view..text: \(String(describing: lbl.text)) tag: \(lbl.tag)")
+        //print("Adding view..text: \(String(describing: lbl.text)) tag: \(lbl.tag)")
         
         return lbl
     }
@@ -110,26 +114,58 @@ class GamingViewController: UIViewController {
             selSquare = squares.getSquare(index: viewTag)
             
             guard let selSquare = selSquare else { return }
+            guard let marker = currentPlayer?.marker else { return }
             
-            selSquare.setChecked()
+            selSquare.setChecked(playerMark: marker)
             
             let targetLbl = self.view.viewWithTag(viewTag) as? UILabel
             
             targetLbl?.text = selSquare.squareVal.rawValue
             
-            //TODO MOVE TO BTN CLICK
-                finalizeSquare()
-                //selSquare.setFinalized()
-                print("Square Finalized: \(selSquare.finalized)")
+            //TODO MOVE TO BTN CLICK?
+            finalizeSquare()
+             
+            print("Square Finalized: \(selSquare.finalized)")
+            currentPlayer?.selectedSquares[viewTag-1] = viewTag
+            print("Selected Squares: \(currentPlayer?.selectedSquares)")
             //CHECK AFTER EACH PLACEMENT
-                print("CheckBoard Full: \(squares.isCheckBoardFull())")
-            squares.calcWinningSquares()
+            checkIfWin()
+            print("CheckBoard Full: \(squares.isCheckBoardFull())")
+            changeTurn()
+            
             
             if(squares.isCheckBoardFull()){
                 squares.resetBoard()
+                players.setResetAllSelections(count: squares.totSquares)
                 resetLabelSquares()
             }
 
+        }
+    }
+    
+    func changeTurn(){
+        if(turn == 0){
+            turn = 1
+        }else{
+            turn = 0
+        }
+        setCurrentPlayer()
+    }
+    
+    func setCurrentPlayer(){
+        currentPlayer = players.getList()[turn]
+    }
+    
+    func checkIfWin(){
+        let winList = squares.winningLines
+        
+        if currentPlayer != nil {
+            print(currentPlayer!)
+            
+            for _ in winList {
+                
+                
+            }
         }
     }
     

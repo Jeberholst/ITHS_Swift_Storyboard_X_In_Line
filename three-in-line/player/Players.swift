@@ -10,7 +10,7 @@ import Foundation
 class Players {
     
     private var list: [Player]
-    
+
     init(){
         list = [Player]()
     }
@@ -20,7 +20,13 @@ class Players {
     }
     
     func getList() -> [Player]{
-        return list
+        return self.list
+    }
+    
+    func setResetAllSelections(count: Int){
+        for player in list {
+            player.setResetSelectionSize(count: count)
+        }
     }
     
     

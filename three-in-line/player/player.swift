@@ -7,22 +7,23 @@
 
 import Foundation
 
-struct Player {
+class Player {
     
     var name: String
     var points: [Int]
     var rounds: [Int]
-    var marker: String
+    var marker: SquareVal
+    var selectedSquares = Array<Int>()
     var isComputerBot: Bool = false
     
-    init(name: String, points: Array<Int>, rounds: Array<Int>, marker: String) {
+    init(name: String, points: Array<Int>, rounds: Array<Int>, marker: SquareVal) {
         self.name = name
         self.points = points
         self.rounds = rounds
         self.marker = marker
     }
     
-    func totalScorBe() -> Int {
+    func totalScore() -> Int {
         //TODO : Sum points array
        // var total = list.map({$0.points}).reduce(0, +)
         //total from list with specific element
@@ -31,13 +32,15 @@ struct Player {
         return 0
     }
     
-    mutating func addPointAndCurrRound(point: Int, currRound: Int){
+    func addPointAndCurrRound(point: Int, currRound: Int){
         points.append(point)
         rounds.append(currRound)
     }
     
-    func scoreList(){
-        
+    func setResetSelectionSize(count: Int) {
+        selectedSquares = Array(repeating: 0, count: count)
+        print("SelectedSquareSize \(selectedSquares)")
     }
+    
     
 }

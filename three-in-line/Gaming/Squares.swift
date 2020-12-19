@@ -14,12 +14,13 @@ class Squares {
     //TODO: ADD AS INPUT VARIABLE?
     var columns = 3
     var rows = 3
-    let totSquares = 9
+    var totSquares: Int
     
     var winningLines = [[Int]]()
     
     init() {
         list = [Square]()
+        totSquares = (columns * rows)
         
         addInitialSquares(amount: totSquares)
     }
@@ -29,7 +30,7 @@ class Squares {
         
         squaresToAdd.forEach { i in
             let sq = Square(index: i, checked: false, finalized: false)
-            print(sq)
+            //print(sq)
             addASquare(square: sq)
         }
     }
