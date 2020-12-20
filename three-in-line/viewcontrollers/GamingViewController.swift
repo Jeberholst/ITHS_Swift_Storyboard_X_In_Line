@@ -162,9 +162,16 @@ class GamingViewController: UIViewController {
         if currentPlayer != nil {
             print(currentPlayer!)
             
-            for _ in winList {
-                
-                
+            for item in winList {
+                var counter = 0
+                for i in (0...item.count-1) {
+                    //print("i: \(i)")
+                    if currentPlayer!.selectedSquares[i] == item[i] {
+                        counter += 1
+                    }
+                }
+                print("Item: \(item)")
+                print("cnt \(counter)")
             }
         }
     }

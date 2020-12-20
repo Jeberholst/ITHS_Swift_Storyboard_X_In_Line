@@ -38,7 +38,7 @@ class Player {
     }
     
     func setResetSelectionSize(count: Int) {
-        selectedSquares = Array(repeating: 0, count: count)
+        selectedSquares = Array(repeating: 11, count: count)
         print("SelectedSquareSize \(selectedSquares)")
     }
     
