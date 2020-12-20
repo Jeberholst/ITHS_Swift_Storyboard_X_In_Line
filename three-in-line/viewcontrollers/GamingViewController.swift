@@ -12,7 +12,9 @@ class GamingViewController: UIViewController {
     var squares = Squares()
     var players = Players()
     var currentPlayer: Player? = nil
-    var round = 1
+    var round = 0
+    var isBoardFull: Bool = false
+    var isPlayerWin: Bool = false
     
     @IBOutlet weak var squaresContainer: UIView!
     
@@ -20,6 +22,13 @@ class GamingViewController: UIViewController {
     @IBOutlet weak var lblPlayer2Name: UILabel!
     @IBOutlet weak var lblPlayer1Points: UILabel!
     @IBOutlet weak var lblPlayer2Points: UILabel!
+    @IBOutlet weak var lblRound: UILabel!
+
+    @IBOutlet weak var btnNextRound: UIButton!
+    
+    @IBAction func btnNextRound(_ sender: UIButton) {
+        onNextRound()
+    }
     
     var xy = 0
     var yx = 0
@@ -30,10 +39,10 @@ class GamingViewController: UIViewController {
     
     var turn = 0
     
-    @IBOutlet weak var gridView: UIView!
-   
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()	
+        increaseRound()
+        hideShowBtnNextRound(hidden: true)
         
         addPlayers()
         
@@ -61,6 +70,11 @@ class GamingViewController: UIViewController {
        
     }
     
+    func updatePlayerPointsUI(){
+        
+        
+    }
+    
     func createViews(){
 
         let cols = squares.columns
@@ -68,7 +82,7 @@ class GamingViewController: UIViewController {
         for item in squareList {
             let labelToAdd = createUIsquare(item: item)
             xy += squareSize + 5
-            gridView.addSubview(labelToAdd)
+            squaresContainer.addSubview(labelToAdd)
             
             if (item.index % cols) == 0 {
                 xy = 0
@@ -115,7 +129,6 @@ class GamingViewController: UIViewController {
         if sender.state == .ended {
             
             guard let viewTag = sender.view?.tag else { return }
-            print(viewTag)
             
             selSquare = squares.getSquare(index: viewTag)
             
@@ -131,19 +144,20 @@ class GamingViewController: UIViewController {
             finalizeSquare()
              
             currentPlayer?.selectedSquares[viewTag-1] = viewTag
-            print("Selected Squares: \(String(describing: currentPlayer?.selectedSquares))")
+            	
+            isBoardFull = squares.isCheckBoardFull()
+            isPlayerWin = squares.checkIfWin(currPlayer: currentPlayer)
             
-            print("WIN: \(squares.checkIfWin(currPlayer: currentPlayer))")
-            print("CheckBoard Full: \(squares.isCheckBoardFull())")
-            changeTurn()
-            disableEnableSquaresLabelClick(enable: false)
-            
-            if(squares.isCheckBoardFull()){
-                squares.resetBoard()
-                players.setResetAllSelections(count: squares.totSquares)
-                resetLabelSquares()
+            if(isPlayerWin){
+                onWin()
             }
-
+            
+            if(isBoardFull == true && isPlayerWin != false){
+                onDraw()
+            }
+            
+            changeTurn()
+            
         }
     }
     
@@ -161,22 +175,32 @@ class GamingViewController: UIViewController {
     }
     
     func onWin(){
-        
         currentPlayer?.addPointAndCurrRound(point: 1, currRound: round)
         //ADD OTHER PLAYER IN VAR?
         disableEnableSquaresLabelClick(enable: false)
+        hideShowBtnNextRound(hidden: false)
     }
     
     func onDraw(){
-        
         currentPlayer?.addPointAndCurrRound(point: 0, currRound: round)
         //ADD OTHER PLAYER IN VAR?
         disableEnableSquaresLabelClick(enable: false)
-        
+        hideShowBtnNextRound(hidden: false)
     }
     
     func onNextRound(){
+        squares.resetBoard()
+        resetLabelSquares()
+        players.setResetAllSelections(count: squares.totSquares)
         disableEnableSquaresLabelClick(enable: true)
+        changeTurn()
+        increaseRound()
+        hideShowBtnNextRound(hidden: true)
+    }
+    
+    func increaseRound(){
+        round += 1
+        lblRound.text = "Round \(round)"
     }
     
     func disableEnableSquaresLabelClick(enable: Bool){
@@ -185,6 +209,10 @@ class GamingViewController: UIViewController {
                 child.isUserInteractionEnabled = enable
             }
         }
+    }
+    
+    func hideShowBtnNextRound(hidden: Bool){
+        btnNextRound.isHidden = hidden
     }
     
 }

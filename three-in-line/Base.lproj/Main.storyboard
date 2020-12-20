@@ -148,7 +148,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJB-dv-Apd">
-                                <rect key="frame" x="57" y="377" width="300" height="336"/>
+                                <rect key="frame" x="57" y="388" width="300" height="325"/>
                                 <color key="backgroundColor" red="0.96267438175702336" green="0.96267438175702336" blue="0.96267438175702336" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9t-7g-fKv">
@@ -156,12 +156,23 @@
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="DrG-21-8Kr"/>
-                                    <constraint firstAttribute="width" constant="300" id="Nv4-Xo-xdQ"/>
                                 </constraints>
                                 <state key="normal" title="Next round">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnNextRound:" destination="TFy-QS-xJS" eventType="touchUpInside" id="FFe-b9-CGr"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQK-hx-ksj">
+                                <rect key="frame" x="57" y="346.5" width="300" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="WLb-hr-bdo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pQD-pe-4ab"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -170,9 +181,10 @@
                             <constraint firstItem="pQD-pe-4ab" firstAttribute="trailing" secondItem="zav-of-PAJ" secondAttribute="trailing" constant="39" id="47b-wP-vgX"/>
                             <constraint firstItem="RJB-dv-Apd" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="57" id="8E6-aQ-N7t"/>
                             <constraint firstItem="bfT-qS-kX2" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="20" id="9es-jy-tPS"/>
-                            <constraint firstItem="RJB-dv-Apd" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="289" id="BfI-ep-gt8"/>
+                            <constraint firstItem="RJB-dv-Apd" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="300" id="BfI-ep-gt8"/>
                             <constraint firstItem="r9t-7g-fKv" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="57" id="DIy-90-G4p"/>
                             <constraint firstItem="EiZ-bh-Tkb" firstAttribute="width" secondItem="zav-of-PAJ" secondAttribute="width" id="EVB-Yv-2T4"/>
+                            <constraint firstItem="rQK-hx-ksj" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="57" id="Ees-UB-uE2"/>
                             <constraint firstItem="3Kf-Uj-Cja" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="131" id="HjB-NA-RAY"/>
                             <constraint firstItem="bfT-qS-kX2" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="35" id="Hmv-hc-wAx"/>
                             <constraint firstItem="3Kf-Uj-Cja" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="40" id="Ht7-OU-d2X"/>
@@ -182,7 +194,9 @@
                             <constraint firstItem="3Kf-Uj-Cja" firstAttribute="width" secondItem="UFK-Uq-YrA" secondAttribute="width" multiplier="0.4875" constant="79.4375" id="SZC-6F-ha2"/>
                             <constraint firstItem="KMu-CZ-usU" firstAttribute="top" secondItem="bfT-qS-kX2" secondAttribute="bottom" constant="8" symbolic="YES" id="V3P-Oh-fJZ"/>
                             <constraint firstItem="pQD-pe-4ab" firstAttribute="trailing" secondItem="r9t-7g-fKv" secondAttribute="trailing" constant="57" id="eYK-Vt-Mxy"/>
+                            <constraint firstItem="RJB-dv-Apd" firstAttribute="top" secondItem="rQK-hx-ksj" secondAttribute="bottom" constant="21" id="gf2-wp-H65"/>
                             <constraint firstItem="zav-of-PAJ" firstAttribute="leading" secondItem="UFK-Uq-YrA" secondAttribute="trailing" constant="25" id="hX1-xk-Ux6"/>
+                            <constraint firstItem="pQD-pe-4ab" firstAttribute="trailing" secondItem="rQK-hx-ksj" secondAttribute="trailing" constant="57" id="hrk-CD-gyl"/>
                             <constraint firstItem="pQD-pe-4ab" firstAttribute="trailing" secondItem="EiZ-bh-Tkb" secondAttribute="trailing" constant="39" id="jr0-qh-V5C"/>
                             <constraint firstItem="EiZ-bh-Tkb" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="131" id="kPf-sx-hNh"/>
                             <constraint firstItem="pQD-pe-4ab" firstAttribute="bottom" secondItem="RJB-dv-Apd" secondAttribute="bottom" constant="100" id="paJ-gN-e4v"/>
@@ -194,11 +208,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="1 VS 1" id="bRN-Zg-yr3"/>
                     <connections>
-                        <outlet property="gridView" destination="RJB-dv-Apd" id="iTk-gk-4F6"/>
+                        <outlet property="btnNextRound" destination="r9t-7g-fKv" id="liT-cY-SQy"/>
                         <outlet property="lblPlayer1Name" destination="3Kf-Uj-Cja" id="dyt-mJ-706"/>
                         <outlet property="lblPlayer1Points" destination="UFK-Uq-YrA" id="C7N-t0-Bnz"/>
                         <outlet property="lblPlayer2Name" destination="EiZ-bh-Tkb" id="Gbf-1n-yNc"/>
                         <outlet property="lblPlayer2Points" destination="zav-of-PAJ" id="PIy-lm-8vI"/>
+                        <outlet property="lblRound" destination="rQK-hx-ksj" id="tM7-sE-z43"/>
                         <outlet property="squaresContainer" destination="RJB-dv-Apd" id="eo0-CH-qnM"/>
                     </connections>
                 </viewController>
