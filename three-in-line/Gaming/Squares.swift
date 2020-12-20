@@ -68,6 +68,28 @@ class Squares {
         }
     }
     
+    func checkIfWin(currPlayer: Player?) -> Bool {
+        
+        if currPlayer != nil {
+            for item in winningLines {
+                var counter = 0
+                for i in (0...item.count-1) {
+                    if currPlayer!.selectedSquares[i] == item[i] {
+                        counter += 1
+                    }
+                }
+                if(counter == columns){
+                    print("WIN")
+                    return true
+                }
+
+            }
+        }
+        
+        return false
+        
+    }
+    
     func calcWinLines(){
         
             var winLines = [[Int]]()

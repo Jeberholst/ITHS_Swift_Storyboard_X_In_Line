@@ -12,7 +12,15 @@ class GamingViewController: UIViewController {
     var squares = Squares()
     var players = Players()
     var currentPlayer: Player? = nil
-
+    var round = 1
+    
+    @IBOutlet weak var squaresContainer: UIView!
+    
+    @IBOutlet weak var lblPlayer1Name: UILabel!
+    @IBOutlet weak var lblPlayer2Name: UILabel!
+    @IBOutlet weak var lblPlayer1Points: UILabel!
+    @IBOutlet weak var lblPlayer2Points: UILabel!
+    
     var xy = 0
     var yx = 0
     let vhheight = 50
@@ -46,6 +54,11 @@ class GamingViewController: UIViewController {
         
         players.setResetAllSelections(count: squares.totSquares)
         
+        lblPlayer1Name.text = String(player1.name)
+        lblPlayer1Points.text = "1"
+        lblPlayer2Name.text = String(player2.name)
+        lblPlayer2Points.text = "0"
+       
     }
     
     func createViews(){
@@ -53,20 +66,15 @@ class GamingViewController: UIViewController {
         let cols = squares.columns
         
         for item in squareList {
-            
             let labelToAdd = createUIsquare(item: item)
-
             xy += squareSize + 5
-            
             gridView.addSubview(labelToAdd)
             
             if (item.index % cols) == 0 {
                 xy = 0
                 yx += squareSize + 5
             }
-            
         }
-
     }
 
     
@@ -99,8 +107,6 @@ class GamingViewController: UIViewController {
         
         lbl.addGestureRecognizer(sTap)
         
-        //print("Adding view..text: \(String(describing: lbl.text)) tag: \(lbl.tag)")
-        
         return lbl
     }
     
@@ -122,17 +128,15 @@ class GamingViewController: UIViewController {
             
             targetLbl?.text = selSquare.squareVal.rawValue
             
-            //TODO MOVE TO BTN CLICK?
             finalizeSquare()
              
-            print("Square Finalized: \(selSquare.finalized)")
             currentPlayer?.selectedSquares[viewTag-1] = viewTag
-            print("Selected Squares: \(currentPlayer?.selectedSquares)")
-            //CHECK AFTER EACH PLACEMENT
-            checkIfWin()
+            print("Selected Squares: \(String(describing: currentPlayer?.selectedSquares))")
+            
+            print("WIN: \(squares.checkIfWin(currPlayer: currentPlayer))")
             print("CheckBoard Full: \(squares.isCheckBoardFull())")
             changeTurn()
-            
+            disableEnableSquaresLabelClick(enable: false)
             
             if(squares.isCheckBoardFull()){
                 squares.resetBoard()
@@ -156,22 +160,29 @@ class GamingViewController: UIViewController {
         currentPlayer = players.getList()[turn]
     }
     
-    func checkIfWin(){
-        let winList = squares.winningLines
+    func onWin(){
         
-        if currentPlayer != nil {
-            print(currentPlayer!)
-            
-            for item in winList {
-                var counter = 0
-                for i in (0...item.count-1) {
-                    //print("i: \(i)")
-                    if currentPlayer!.selectedSquares[i] == item[i] {
-                        counter += 1
-                    }
-                }
-                print("Item: \(item)")
-                print("cnt \(counter)")
+        currentPlayer?.addPointAndCurrRound(point: 1, currRound: round)
+        //ADD OTHER PLAYER IN VAR?
+        disableEnableSquaresLabelClick(enable: false)
+    }
+    
+    func onDraw(){
+        
+        currentPlayer?.addPointAndCurrRound(point: 0, currRound: round)
+        //ADD OTHER PLAYER IN VAR?
+        disableEnableSquaresLabelClick(enable: false)
+        
+    }
+    
+    func onNextRound(){
+        disableEnableSquaresLabelClick(enable: true)
+    }
+    
+    func disableEnableSquaresLabelClick(enable: Bool){
+        for child in squaresContainer.subviews {
+            if(child is UILabel){
+                child.isUserInteractionEnabled = enable
             }
         }
     }
