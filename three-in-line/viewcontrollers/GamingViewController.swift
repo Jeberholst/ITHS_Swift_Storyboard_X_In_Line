@@ -18,12 +18,11 @@ class GamingViewController: UIViewController {
     
     @IBOutlet weak var squaresContainer: UIView!
     
-    @IBOutlet weak var lblPlayer1Name: UILabel!
-    @IBOutlet weak var lblPlayer2Name: UILabel!
-    @IBOutlet weak var lblPlayer1Points: UILabel!
-    @IBOutlet weak var lblPlayer2Points: UILabel!
     @IBOutlet weak var lblRound: UILabel!
-
+    
+    @IBOutlet var playerNameLabels: [UILabel]!
+    @IBOutlet var playerPointsLabels: [UILabel]!
+    
     @IBOutlet weak var btnNextRound: UIButton!
     
     @IBAction func btnNextRound(_ sender: UIButton) {
@@ -43,35 +42,36 @@ class GamingViewController: UIViewController {
         super.viewDidLoad()	
         increaseRound()
         hideShowBtnNextRound(hidden: true)
-        
         addPlayers()
-        
         changeTurn()
-        
         createViews()
         squares.calcWinLines()
-        
     }
     
     func addPlayers(){
         
-        let player1 = Player(name: "Jocke", points: [Int](), rounds: [Int](), marker: SquareVal.X)
-        let player2 = Player(name: "Anon", points: [Int](), rounds: [Int](), marker: SquareVal.O)
+        let player1 = Player(name: "Jocke", points: [Int](), rounds: [Int](), marker: SquareVal.X, playerNum: 1)
+        let player2 = Player(name: "Anon", points: [Int](), rounds: [Int](), marker: SquareVal.O, playerNum: 2)
         
         players.addPlayer(player: player1)
         players.addPlayer(player: player2)
         
         players.setResetAllSelections(count: squares.totSquares)
         
-        lblPlayer1Name.text = String(player1.name)
-        lblPlayer1Points.text = "1"
-        lblPlayer2Name.text = String(player2.name)
-        lblPlayer2Points.text = "0"
+        playerNameLabels[0].text = String(player1.name)
+        playerPointsLabels[0].text = "0"
+        playerNameLabels[1].text = String(player2.name)
+        playerPointsLabels[1].text = "0"
        
     }
     
-    func updatePlayerPointsUI(){
+    func UIupdatePlayerPoints(){
         
+        let pointsPlayer1 = players.getList()[0]
+        let pointsPlayer2 = players.getList()[1]
+        
+        playerPointsLabels[0].text = String(pointsPlayer1.pointsTotal())
+        playerPointsLabels[1].text = String(pointsPlayer2.pointsTotal())
         
     }
     
@@ -91,7 +91,6 @@ class GamingViewController: UIViewController {
         }
     }
 
-    
     func finalizeSquare(){
         selSquare?.setFinalized()
     }
@@ -124,7 +123,6 @@ class GamingViewController: UIViewController {
         return lbl
     }
     
-    
     @objc func didTap(sender: UITapGestureRecognizer){
         if sender.state == .ended {
             
@@ -142,6 +140,7 @@ class GamingViewController: UIViewController {
             targetLbl?.text = selSquare.squareVal.rawValue
             
             finalizeSquare()
+            targetLbl?.isUserInteractionEnabled = false
              
             currentPlayer?.selectedSquares[viewTag-1] = viewTag
             	
@@ -152,8 +151,12 @@ class GamingViewController: UIViewController {
                 onWin()
             }
             
-            if(isBoardFull == true && isPlayerWin != false){
-                onDraw()
+            if  (isBoardFull){
+                if(!isPlayerWin){
+                    onDraw()
+                } else {
+                    onWin()
+                }
             }
             
             changeTurn()
@@ -168,19 +171,31 @@ class GamingViewController: UIViewController {
             turn = 0
         }
         setCurrentPlayer()
+        setBackgroundColorActivePlayer()
     }
     
     func setCurrentPlayer(){
-        currentPlayer = players.getList()[turn]
+        currentPlayer = players.getList()[turn] 
+    }
+    
+    func setBackgroundColorActivePlayer(){
+        for lbl in playerNameLabels {
+          //  lbl.textColor = UIColor.black
+            lbl.backgroundColor = UIColor.systemBackground
+        }
+        //viewFadeOutIn(lbl: lblRound, setText: "Round \(round)")
+        viewFadeOutInBackground(lbl: playerNameLabels[turn])
+        //playerNameLabels[turn].backgroundColor = UIColor.systemGray6
     }
     
     func onWin(){
         currentPlayer?.addPointAndCurrRound(point: 1, currRound: round)
+        UIupdatePlayerPoints()
         //ADD OTHER PLAYER IN VAR?
         disableEnableSquaresLabelClick(enable: false)
         hideShowBtnNextRound(hidden: false)
     }
-    
+
     func onDraw(){
         currentPlayer?.addPointAndCurrRound(point: 0, currRound: round)
         //ADD OTHER PLAYER IN VAR?
@@ -193,14 +208,15 @@ class GamingViewController: UIViewController {
         resetLabelSquares()
         players.setResetAllSelections(count: squares.totSquares)
         disableEnableSquaresLabelClick(enable: true)
-        changeTurn()
+        //changeTurn()
         increaseRound()
         hideShowBtnNextRound(hidden: true)
     }
     
     func increaseRound(){
         round += 1
-        lblRound.text = "Round \(round)"
+        viewFadeOutIn(lbl: lblRound, setText: "Round \(round)")
+        //lblRound.text = "Round \(round)"
     }
     
     func disableEnableSquaresLabelClick(enable: Bool){
@@ -209,6 +225,34 @@ class GamingViewController: UIViewController {
                 child.isUserInteractionEnabled = enable
             }
         }
+    }
+    
+    func viewFadeOutInBackground(lbl: UILabel){
+        UIView.animate(withDuration: 0.5, animations: {
+            lbl.alpha = 0.5
+        }, completion: {_ in
+            lbl.backgroundColor = UIColor.systemGray6
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                lbl.alpha = 1.0
+            }, completion: { _ in
+                
+            })
+        })
+    }
+    
+    func viewFadeOutIn(lbl: UILabel, setText: String){
+        UIView.animate(withDuration: 1.0, animations: {
+            lbl.alpha = 0.0
+        }, completion: {_ in
+            lbl.text = setText
+            
+            UIView.animate(withDuration: 1.0, animations: {
+                lbl.alpha = 1.0
+            }, completion: { _ in
+                
+            })
+        })
     }
     
     func hideShowBtnNextRound(hidden: Bool){

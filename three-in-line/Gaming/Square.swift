@@ -47,5 +47,5 @@ class Square {
 enum SquareVal: String {
     case X = "X"
     case O = "O"
-    case EMPTY = "E"
+    case EMPTY = ""
 }
