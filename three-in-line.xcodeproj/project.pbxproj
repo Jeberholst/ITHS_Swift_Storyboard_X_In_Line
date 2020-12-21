@@ -139,7 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				43681B092591658400F4E64E /* Player */,
-				43999715258970420089BFC2 /* viewcontrollers */,
+				43999715258970420089BFC2 /* ViewControllers */,
 				4399972C25897C6A0089BFC2 /* Gaming */,
 				432D7D0F25914168001473A0 /* GameMode */,
 				439996E2258970260089BFC2 /* AppDelegate.swift */,
@@ -171,14 +171,14 @@
 			path = "three-in-lineUITests";
 			sourceTree = "<group>";
 		};
-		43999715258970420089BFC2 /* viewcontrollers */ = {
+		43999715258970420089BFC2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				439996E6258970260089BFC2 /* ViewController.swift */,
 				4399973825897FCC0089BFC2 /* GamingViewController.swift */,
 				432D7D0525913FB1001473A0 /* GameModeViewController.swift */,
 			);
-			path = viewcontrollers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		4399972C25897C6A0089BFC2 /* Gaming */ = {
