@@ -9,6 +9,8 @@ import UIKit
 
 class GamingViewController: UIViewController {
 
+    private let userDefaultsSelectedColumn = "gameModeSelectedColumns"
+    
     var squares = Squares()
     var players = Players()
     var currentPlayer: Player? = nil
@@ -38,12 +40,15 @@ class GamingViewController: UIViewController {
     var yx = 0
     var squareSize = 0
     var selSquare: Square? = nil
-    let squareList = Squares().getList()
+    //let squareList = Squares().getList()
+    var squareList: [Square] = []
     
     var turn = 0
     
     override func viewDidLoad() {
-        super.viewDidLoad()	
+        super.viewDidLoad()
+        squares.setColumns(columns: getSelectedGameMode())
+        squareList = squares.getList()
         increaseRound()
         hideShowBtnNextRound(hidden: true)
         addPlayers()
@@ -53,10 +58,17 @@ class GamingViewController: UIViewController {
         squares.calcWinLines()
     }
     
+    func getSelectedGameMode() -> Int {
+        
+        let selectedGameModeColumns = UserDefaults.standard.integer(forKey: userDefaultsSelectedColumn)
+        return selectedGameModeColumns
+        
+    }
+    
     func addPlayers(){
         
-        let player1 = Player(name: "Jocke", points: [Int](), rounds: [Int](), marker: SquareVal.X, playerNum: 1)
-        let player2 = Player(name: "Anon", points: [Int](), rounds: [Int](), marker: SquareVal.O, playerNum: 2)
+        let player1 = Player(name: "Jocke", points: [Int](), rounds: [Int](), marker: SquareVal.X)
+        let player2 = Player(name: "Anon", points: [Int](), rounds: [Int](), marker: SquareVal.O)
         
         players.addPlayer(player: player1)
         players.addPlayer(player: player2)
@@ -71,13 +83,8 @@ class GamingViewController: UIViewController {
     }
     
     func UIupdatePlayerPoints(){
-        
-        let pointsPlayer1 = players.getList()[0]
-        let pointsPlayer2 = players.getList()[1]
-        
-        playerPointsLabels[0].text = String(pointsPlayer1.pointsTotal())
-        playerPointsLabels[1].text = String(pointsPlayer2.pointsTotal())
-        
+        playerPointsLabels[0].text = String(players.getList()[0].pointsTotal())
+        playerPointsLabels[1].text = String(players.getList()[1].pointsTotal())
     }
     
     func UIupdatePlayerNames(){
@@ -100,10 +107,6 @@ class GamingViewController: UIViewController {
                 yx += (squareSize + 5)
             }
         }
-    }
-
-    func finalizeSquare(){
-        selSquare?.setFinalized()
     }
     
     func resetLabelSquares(){
@@ -153,7 +156,7 @@ class GamingViewController: UIViewController {
             
             targetLbl?.text = selSquare.squareVal.rawValue
             
-            finalizeSquare()
+            selSquare.setFinalized()
             targetLbl?.isUserInteractionEnabled = false
              
             currentPlayer?.selectedSquares[viewTag-1] = viewTag
@@ -168,7 +171,6 @@ class GamingViewController: UIViewController {
                     onWin()
                 }
             } else {
-                
                 if(isPlayerWin){
                     onWin()
                 }
@@ -301,16 +303,18 @@ class GamingViewController: UIViewController {
     }
     
     func openNameInputDialog() {
-        let alertUI = UIAlertController(title: "Playernames",
-                                        message: "Change player-names here",
+        let alertUI = UIAlertController(title: "Edit names",
+                                        message: "Use fields below to input names",
                                         preferredStyle: .alert)
         
         alertUI.addTextField{ textField in
-            textField.placeholder = "Player 1 Name"
+            //textField.placeholder = "Name of Player 1"
+            textField.text = self.players.getList()[0].name
             textField.autocapitalizationType = .words
         }
         alertUI.addTextField{ textField in
-            textField.placeholder = "Player 2 Name"
+            //textField.placeholder = "Name of Player 2"
+            textField.text = self.players.getList()[1].name
             textField.autocapitalizationType = .words
         }
         

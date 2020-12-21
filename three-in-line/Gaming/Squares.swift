@@ -11,26 +11,27 @@ class Squares {
     
     private var list: [Square]
     
-    //TODO: ADD AS INPUT VARIABLE?
-    var columns = 3
-    //var rows = 3
-    var totSquares: Int
+    var columns: Int = 3
+    var totSquares: Int = 9
     
     var winningLines = [[Int]]()
     
     init() {
         list = [Square]()
-        totSquares = (columns * columns)
-        
+        //totSquares = (columns * columns)
+        //addInitialSquares(amount: totSquares)
+    }
+    
+    func setColumns(columns: Int){
+        self.columns = columns
+        self.totSquares = (columns * columns)
         addInitialSquares(amount: totSquares)
     }
     
-    private func addInitialSquares(amount: Int){
+    func addInitialSquares(amount: Int){
         let squaresToAdd = (1...amount)
-        
         squaresToAdd.forEach { i in
             let sq = Square(index: i, checked: false, finalized: false)
-            //print(sq)
             addASquare(square: sq)
         }
     }
@@ -74,7 +75,6 @@ class Squares {
     }
     
     func checkIfWin(currPlayer: Player?) -> Bool {
-        
         if currPlayer != nil {
             for item in winningLines {
                 var counter = 0
@@ -90,17 +90,14 @@ class Squares {
 
             }
         }
-        
         return false
-        
     }
     
     func calcWinLines(){
         
             var winLines = [[Int]]()
             var arrHorizontal = [[Int]]()
-            //var diagonalArr = [[Int]]()
-            
+          
             for ind in stride(from: 1, to: totSquares, by: columns){
                 
                 var hArr = [Int]()
@@ -128,17 +125,13 @@ class Squares {
                 dArr.append(arrHorizontal[i-1][i-1])
             }
         
-            //diagonalArr.append(dArr)
-            
             let rev = arrVertical.reversed() as Array
-            //print(rev)
             
             var dArr2 = [Int]()
             for i in 1...columns {
                 dArr2.append(rev[i-1][i-1])
             }
-            //diagonalArr.append(dArr2)
-        
+  
             winLines.append(dArr)
             winLines.append(dArr2)
         
@@ -152,9 +145,6 @@ class Squares {
                 winningLines.append(arr)
                 
             }
-        
-            print("Possible matches: \(winningLines)")
-            
+            //print("Possible matches: \(winningLines)")
         }
-    
 }
