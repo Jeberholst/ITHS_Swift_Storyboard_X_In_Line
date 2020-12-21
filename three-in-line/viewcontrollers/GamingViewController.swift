@@ -26,6 +26,10 @@ class GamingViewController: UIViewController {
     
     @IBOutlet weak var btnNextRound: UIButton!
     
+    @IBAction func editPlayers(_ sender: UIBarButtonItem) {
+        openNameInputDialog()
+    }
+    
     @IBAction func btnNextRound(_ sender: UIButton) {
         onNextRound()
     }
@@ -43,11 +47,10 @@ class GamingViewController: UIViewController {
         increaseRound()
         hideShowBtnNextRound(hidden: true)
         addPlayers()
-        squareSize = squares.calculateSquareSize(containerViewWidth: Int(squaresContainer.bounds.width))
+        squareSize = squares.calculateSquareSize(containerViewWidth: Int(squaresContainer.bounds.width) - (squares.columns * 5))
         changeTurn()
         createViews()
         squares.calcWinLines()
-        
     }
     
     func addPlayers(){
@@ -77,6 +80,11 @@ class GamingViewController: UIViewController {
         
     }
     
+    func UIupdatePlayerNames(){
+        playerNameLabels[0].text = players.getList()[0].name
+        playerNameLabels[1].text = players.getList()[1].name
+    }
+    
     func createViews(){
 
         let cols = squares.columns
@@ -101,7 +109,9 @@ class GamingViewController: UIViewController {
     func resetLabelSquares(){
         for item in squares.getList() {
             let findLbl = self.view.viewWithTag(item.index) as? UILabel
-            findLbl?.text = item.squareVal.rawValue
+            if let findLbl = findLbl {
+                viewFadeOutIn(lbl: findLbl, setText: item.squareVal.rawValue)
+            }
         }
     }
     
@@ -151,20 +161,20 @@ class GamingViewController: UIViewController {
             isBoardFull = squares.isCheckBoardFull()
             isPlayerWin = squares.checkIfWin(currPlayer: currentPlayer)
             
-            if(isPlayerWin){
-                onWin()
-            }
-            
-            if  (isBoardFull){
+            if (isBoardFull){
                 if(!isPlayerWin){
                     onDraw()
                 } else {
                     onWin()
                 }
+            } else {
+                
+                if(isPlayerWin){
+                    onWin()
+                }
             }
             
             changeTurn()
-            
         }
     }
     
@@ -189,12 +199,12 @@ class GamingViewController: UIViewController {
 
         turnStackNot.subviews.forEach{ v in
             let view = v as? UILabel
-            view?.textColor = UIColor.black
+            view?.textColor = UIColor.systemGray4
         }
         
         turnStack.subviews.forEach{ v in
             let view = v as? UILabel
-            view?.textColor = UIColor.systemGray4
+            view?.textColor = UIColor.black
         }
     }
     
@@ -288,6 +298,39 @@ class GamingViewController: UIViewController {
     func hideShowBtnNextRound(hidden: Bool) {
         btnNextRound.isHidden = hidden
         viewFadeIn(view: btnNextRound)
+    }
+    
+    func openNameInputDialog() {
+        let alertUI = UIAlertController(title: "Playernames",
+                                        message: "Change player-names here",
+                                        preferredStyle: .alert)
+        
+        alertUI.addTextField{ textField in
+            textField.placeholder = "Player 1 Name"
+            textField.autocapitalizationType = .words
+        }
+        alertUI.addTextField{ textField in
+            textField.placeholder = "Player 2 Name"
+            textField.autocapitalizationType = .words
+        }
+        
+        let actionSave = UIAlertAction(title: "Save", style: .default) { action in
+            let tf1 = alertUI.textFields![0] as UITextField
+            let tf2 = alertUI.textFields![1] as UITextField
+            
+            guard let name1 = tf1.text else { return }
+            guard let name2 = tf2.text else { return }
+            
+            self.players.getList()[0].name = name1
+            self.players.getList()[1].name = name2
+
+            self.UIupdatePlayerNames()
+        }
+        
+        alertUI.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertUI.addAction(actionSave)
+        
+        present(alertUI, animated: true)
     }
     
 }

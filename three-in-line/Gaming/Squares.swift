@@ -13,14 +13,14 @@ class Squares {
     
     //TODO: ADD AS INPUT VARIABLE?
     var columns = 3
-    var rows = 3
+    //var rows = 3
     var totSquares: Int
     
     var winningLines = [[Int]]()
     
     init() {
         list = [Square]()
-        totSquares = (columns * rows)
+        totSquares = (columns * columns)
         
         addInitialSquares(amount: totSquares)
     }

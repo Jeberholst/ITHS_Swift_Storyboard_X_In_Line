@@ -212,7 +212,13 @@
                             <constraint firstItem="KMu-CZ-usU" firstAttribute="centerX" secondItem="1yS-x7-JnP" secondAttribute="centerX" id="yXT-hb-QbE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="1 VS 1" id="bRN-Zg-yr3"/>
+                    <navigationItem key="navigationItem" title="1 VS 1" id="bRN-Zg-yr3">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="jyI-bl-tdm">
+                            <connections>
+                                <action selector="editPlayers:" destination="TFy-QS-xJS" id="bku-9h-hyd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="btnNextRound" destination="r9t-7g-fKv" id="liT-cY-SQy"/>
                         <outlet property="lblRound" destination="rQK-hx-ksj" id="tM7-sE-z43"/>
@@ -229,7 +235,7 @@
             </objects>
             <point key="canvasLocation" x="418.84057971014494" y="-419.19642857142856"/>
         </scene>
-        <!--1 vs Computer-->
+        <!--Title-->
         <scene sceneID="MNy-to-Jav">
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" id="hD7-gA-ZYi" sceneMemberID="viewController">
@@ -296,7 +302,7 @@
                         <viewLayoutGuide key="safeArea" id="Hsh-qv-DW9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="1 vs Computer" id="kMd-Fp-gdl"/>
+                    <navigationItem key="navigationItem" title="Title" id="agD-aK-WmQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jwx-bU-2qd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
