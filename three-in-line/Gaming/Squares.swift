@@ -68,6 +68,11 @@ class Squares {
         }
     }
     
+    func calculateSquareSize(containerViewWidth: Int) -> Int {
+        let size = (containerViewWidth/columns) - 5
+        return size
+    }
+    
     func checkIfWin(currPlayer: Player?) -> Bool {
         
         if currPlayer != nil {

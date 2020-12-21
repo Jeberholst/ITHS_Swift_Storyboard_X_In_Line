@@ -43,16 +43,11 @@ class GamingViewController: UIViewController {
         increaseRound()
         hideShowBtnNextRound(hidden: true)
         addPlayers()
-        stylizeUI()
-        squareSize = calculateSquareSize()
+        squareSize = squares.calculateSquareSize(containerViewWidth: Int(squaresContainer.bounds.width))
         changeTurn()
         createViews()
         squares.calcWinLines()
         
-    }
-    
-    func stylizeUI(){
-    
     }
     
     func addPlayers(){
@@ -90,7 +85,7 @@ class GamingViewController: UIViewController {
             let labelToAdd = createUIsquare(item: item)
             xy += (squareSize + 5)
             squaresContainer.addSubview(labelToAdd)
-            viewFadeIn(view: labelToAdd	)
+            viewFadeIn(view: labelToAdd)
             
             if (item.index % cols) == 0 {
                 xy = 0
@@ -131,15 +126,7 @@ class GamingViewController: UIViewController {
         
         return lbl
     }
-    
-    func calculateSquareSize() -> Int {
-        
-        let containerWidth = Int(squaresContainer.bounds.width)
-        let size = (containerWidth/squares.columns) - 5
-        return size
-        
-    }
-    
+
     @objc func didTap(sender: UITapGestureRecognizer){
         if sender.state == .ended {
             
@@ -209,7 +196,6 @@ class GamingViewController: UIViewController {
             let view = v as? UILabel
             view?.textColor = UIColor.systemGray4
         }
-        
     }
     
     func calcNonTurn() -> Int {
@@ -227,11 +213,23 @@ class GamingViewController: UIViewController {
         currentPlayer?.addPointAndCurrRound(point: 1, currRound: round)
         UIupdatePlayerPoints()
         disableInput()
+        displayWin()
     }
 
     func onDraw(){
         currentPlayer?.addPointAndCurrRound(point: 0, currRound: round)
         disableInput()
+        displayDraw()
+    }
+    
+    func displayWin(){
+        if let playerName = currentPlayer?.name {
+            viewFadeOutIn(lbl: lblRound, setText: "\(playerName) has won")
+        }
+    }
+
+    func displayDraw(){
+        viewFadeOutIn(lbl: lblRound, setText: "Ended in a draw")
     }
     
     func disableInput(){
@@ -251,7 +249,6 @@ class GamingViewController: UIViewController {
         //changeTurn()
         enableInput()
         increaseRound()
-      
     }
     
     func increaseRound(){
@@ -288,7 +285,7 @@ class GamingViewController: UIViewController {
         })
     }
     
-    func hideShowBtnNextRound(hidden: Bool){
+    func hideShowBtnNextRound(hidden: Bool) {
         btnNextRound.isHidden = hidden
         viewFadeIn(view: btnNextRound)
     }
