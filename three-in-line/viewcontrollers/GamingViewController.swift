@@ -22,6 +22,7 @@ class GamingViewController: UIViewController {
     
     @IBOutlet var playerNameLabels: [UILabel]!
     @IBOutlet var playerPointsLabels: [UILabel]!
+    @IBOutlet var playerVerticalStacks: [UIStackView]!
     
     @IBOutlet weak var btnNextRound: UIButton!
     
@@ -31,8 +32,7 @@ class GamingViewController: UIViewController {
     
     var xy = 0
     var yx = 0
-    let vhheight = 50
-    let squareSize = 50
+    var squareSize = 0
     var selSquare: Square? = nil
     let squareList = Squares().getList()
     
@@ -43,9 +43,16 @@ class GamingViewController: UIViewController {
         increaseRound()
         hideShowBtnNextRound(hidden: true)
         addPlayers()
+        stylizeUI()
+        squareSize = calculateSquareSize()
         changeTurn()
         createViews()
         squares.calcWinLines()
+        
+    }
+    
+    func stylizeUI(){
+    
     }
     
     func addPlayers(){
@@ -81,12 +88,13 @@ class GamingViewController: UIViewController {
         
         for item in squareList {
             let labelToAdd = createUIsquare(item: item)
-            xy += squareSize + 5
+            xy += (squareSize + 5)
             squaresContainer.addSubview(labelToAdd)
+            viewFadeIn(view: labelToAdd	)
             
             if (item.index % cols) == 0 {
                 xy = 0
-                yx += squareSize + 5
+                yx += (squareSize + 5)
             }
         }
     }
@@ -105,8 +113,8 @@ class GamingViewController: UIViewController {
     func createUIsquare(item: Square) -> UILabel {
        
         let lbl = UILabel()
-        
-        lbl.frame = CGRect(x: xy, y: yx, width: vhheight, height: vhheight)
+                
+        lbl.frame = CGRect(x: xy, y: yx, width: squareSize, height: squareSize)
         lbl.tag = (item.index)
         lbl.text = "\(item.squareVal.rawValue)"
         lbl.textAlignment = .center
@@ -115,12 +123,21 @@ class GamingViewController: UIViewController {
         lbl.layer.borderColor = UIColor.gray.cgColor
         lbl.layer.borderWidth = 1
         lbl.layer.cornerRadius = 5
+        lbl.alpha = 0.0
         
         let sTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTap))
         
         lbl.addGestureRecognizer(sTap)
         
         return lbl
+    }
+    
+    func calculateSquareSize() -> Int {
+        
+        let containerWidth = Int(squaresContainer.bounds.width)
+        let size = (containerWidth/squares.columns) - 5
+        return size
+        
     }
     
     @objc func didTap(sender: UITapGestureRecognizer){
@@ -179,44 +196,67 @@ class GamingViewController: UIViewController {
     }
     
     func setBackgroundColorActivePlayer(){
-        for lbl in playerNameLabels {
-          //  lbl.textColor = UIColor.black
-            lbl.backgroundColor = UIColor.systemBackground
+        
+        let turnStackNot = playerVerticalStacks[calcNonTurn()]
+        let turnStack = playerVerticalStacks[turn]
+
+        turnStackNot.subviews.forEach{ v in
+            let view = v as? UILabel
+            view?.textColor = UIColor.black
         }
-        //viewFadeOutIn(lbl: lblRound, setText: "Round \(round)")
-        viewFadeOutInBackground(lbl: playerNameLabels[turn])
-        //playerNameLabels[turn].backgroundColor = UIColor.systemGray6
+        
+        turnStack.subviews.forEach{ v in
+            let view = v as? UILabel
+            view?.textColor = UIColor.systemGray4
+        }
+        
+    }
+    
+    func calcNonTurn() -> Int {
+        switch turn {
+        case 0:
+            return 1
+        case 1:
+            return 0
+        default:
+            return 0
+        }
     }
     
     func onWin(){
         currentPlayer?.addPointAndCurrRound(point: 1, currRound: round)
         UIupdatePlayerPoints()
-        //ADD OTHER PLAYER IN VAR?
-        disableEnableSquaresLabelClick(enable: false)
-        hideShowBtnNextRound(hidden: false)
+        disableInput()
     }
 
     func onDraw(){
         currentPlayer?.addPointAndCurrRound(point: 0, currRound: round)
-        //ADD OTHER PLAYER IN VAR?
+        disableInput()
+    }
+    
+    func disableInput(){
         disableEnableSquaresLabelClick(enable: false)
         hideShowBtnNextRound(hidden: false)
+    }
+    
+    func enableInput(){
+        disableEnableSquaresLabelClick(enable: true)
+        hideShowBtnNextRound(hidden: true)
     }
     
     func onNextRound(){
         squares.resetBoard()
         resetLabelSquares()
         players.setResetAllSelections(count: squares.totSquares)
-        disableEnableSquaresLabelClick(enable: true)
         //changeTurn()
+        enableInput()
         increaseRound()
-        hideShowBtnNextRound(hidden: true)
+      
     }
     
     func increaseRound(){
         round += 1
         viewFadeOutIn(lbl: lblRound, setText: "Round \(round)")
-        //lblRound.text = "Round \(round)"
     }
     
     func disableEnableSquaresLabelClick(enable: Bool){
@@ -227,17 +267,9 @@ class GamingViewController: UIViewController {
         }
     }
     
-    func viewFadeOutInBackground(lbl: UILabel){
-        UIView.animate(withDuration: 0.5, animations: {
-            lbl.alpha = 0.5
-        }, completion: {_ in
-            lbl.backgroundColor = UIColor.systemGray6
-            
-            UIView.animate(withDuration: 0.5, animations: {
-                lbl.alpha = 1.0
-            }, completion: { _ in
-                
-            })
+    func viewFadeIn(view: UIView){
+        UIView.animate(withDuration: 1.0, animations: {
+            view.alpha = 1.0
         })
     }
     
@@ -245,6 +277,7 @@ class GamingViewController: UIViewController {
         UIView.animate(withDuration: 1.0, animations: {
             lbl.alpha = 0.0
         }, completion: {_ in
+            
             lbl.text = setText
             
             UIView.animate(withDuration: 1.0, animations: {
@@ -257,6 +290,7 @@ class GamingViewController: UIViewController {
     
     func hideShowBtnNextRound(hidden: Bool){
         btnNextRound.isHidden = hidden
+        viewFadeIn(view: btnNextRound)
     }
     
 }
