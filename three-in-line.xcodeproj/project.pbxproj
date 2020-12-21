@@ -129,7 +129,7 @@
 		439996E1258970260089BFC2 /* three-in-line */ = {
 			isa = PBXGroup;
 			children = (
-				43999719258970520089BFC2 /* player */,
+				43999719258970520089BFC2 /* Player */,
 				43999715258970420089BFC2 /* viewcontrollers */,
 				4399972C25897C6A0089BFC2 /* Gaming */,
 				432D7D0F25914168001473A0 /* GameMode */,
@@ -172,13 +172,13 @@
 			path = viewcontrollers;
 			sourceTree = "<group>";
 		};
-		43999719258970520089BFC2 /* player */ = {
+		43999719258970520089BFC2 /* Player */ = {
 			isa = PBXGroup;
 			children = (
 				43A00F0F258AB738005ACBC6 /* Players.swift */,
 				432D7D20259159AF001473A0 /* Player.swift */,
 			);
-			path = player;
+			path = Player;
 			sourceTree = "<group>";
 		};
 		4399972C25897C6A0089BFC2 /* Gaming */ = {
