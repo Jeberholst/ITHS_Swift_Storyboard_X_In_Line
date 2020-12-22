@@ -38,5 +38,5 @@ class Player {
         print("SelectedSquareSize \(selectedSquares)")
     }
     
-    
+    //
 }
