@@ -40,7 +40,6 @@ class GamingViewController: UIViewController {
     var yx = 0
     var squareSize = 0
     var selSquare: Square? = nil
-    //let squareList = Squares().getList()
     var squareList: [Square] = []
     
     var turn = 0
@@ -51,7 +50,7 @@ class GamingViewController: UIViewController {
         squareList = squares.getList()
         increaseRound()
         hideShowBtnNextRound(hidden: true)
-        addPlayers()
+        initialPlayerSetup()
         squareSize = squares.calculateSquareSize(containerViewWidth: Int(squaresContainer.bounds.width) - (squares.columns * 5))
         changeTurn()
         createViews()
@@ -59,27 +58,14 @@ class GamingViewController: UIViewController {
     }
     
     func getSelectedGameMode() -> Int {
-        
         let selectedGameModeColumns = UserDefaults.standard.integer(forKey: userDefaultsSelectedColumn)
         return selectedGameModeColumns
-        
     }
     
-    func addPlayers(){
-        
-        let player1 = Player(name: "Jocke", points: [Int](), rounds: [Int](), marker: SquareVal.X)
-        let player2 = Player(name: "Anon", points: [Int](), rounds: [Int](), marker: SquareVal.O)
-        
-        players.addPlayer(player: player1)
-        players.addPlayer(player: player2)
-        
+    func initialPlayerSetup(){
         players.setResetAllSelections(count: squares.totSquares)
-        
-        playerNameLabels[0].text = String(player1.name)
-        playerPointsLabels[0].text = "0"
-        playerNameLabels[1].text = String(player2.name)
-        playerPointsLabels[1].text = "0"
-       
+        UIupdatePlayerPoints()
+        UIupdatePlayerNames()
     }
     
     func UIupdatePlayerPoints(){
@@ -258,7 +244,6 @@ class GamingViewController: UIViewController {
         squares.resetBoard()
         resetLabelSquares()
         players.setResetAllSelections(count: squares.totSquares)
-        //changeTurn()
         enableInput()
         increaseRound()
     }

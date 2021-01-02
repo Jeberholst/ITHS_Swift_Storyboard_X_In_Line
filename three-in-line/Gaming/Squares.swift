@@ -18,8 +18,6 @@ class Squares {
     
     init() {
         list = [Square]()
-        //totSquares = (columns * columns)
-        //addInitialSquares(amount: totSquares)
     }
     
     func setColumns(columns: Int){

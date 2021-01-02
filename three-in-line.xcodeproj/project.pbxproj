@@ -21,7 +21,6 @@
 		439996FA2589702B0089BFC2 /* three_in_lineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439996F92589702B0089BFC2 /* three_in_lineTests.swift */; };
 		439997052589702B0089BFC2 /* three_in_lineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439997042589702B0089BFC2 /* three_in_lineUITests.swift */; };
 		43999720258976980089BFC2 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399971F258976980089BFC2 /* GameSettings.swift */; };
-		43999728258978C40089BFC2 /* Gaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43999727258978C40089BFC2 /* Gaming.swift */; };
 		4399973925897FCC0089BFC2 /* GamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399973825897FCC0089BFC2 /* GamingViewController.swift */; };
 		43A00F06258AB097005ACBC6 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A00F05258AB097005ACBC6 /* Square.swift */; };
 		43A00F0B258AB0B8005ACBC6 /* Squares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A00F0A258AB0B8005ACBC6 /* Squares.swift */; };
@@ -66,7 +65,6 @@
 		439997042589702B0089BFC2 /* three_in_lineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = three_in_lineUITests.swift; sourceTree = "<group>"; };
 		439997062589702B0089BFC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4399971F258976980089BFC2 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
-		43999727258978C40089BFC2 /* Gaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gaming.swift; sourceTree = "<group>"; };
 		4399973825897FCC0089BFC2 /* GamingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamingViewController.swift; sourceTree = "<group>"; };
 		43A00F05258AB097005ACBC6 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		43A00F0A258AB0B8005ACBC6 /* Squares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squares.swift; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 			children = (
 				4399971F258976980089BFC2 /* GameSettings.swift */,
 				43A00F0A258AB0B8005ACBC6 /* Squares.swift */,
-				43999727258978C40089BFC2 /* Gaming.swift */,
 				43A00F05258AB097005ACBC6 /* Square.swift */,
 			);
 			path = Gaming;
@@ -324,7 +321,6 @@
 			files = (
 				43A00F0B258AB0B8005ACBC6 /* Squares.swift in Sources */,
 				43A00F06258AB097005ACBC6 /* Square.swift in Sources */,
-				43999728258978C40089BFC2 /* Gaming.swift in Sources */,
 				439996E7258970260089BFC2 /* ViewController.swift in Sources */,
 				432D7D0625913FB1001473A0 /* GameModeViewController.swift in Sources */,
 				43999720258976980089BFC2 /* GameSettings.swift in Sources */,

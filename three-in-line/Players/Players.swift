@@ -13,6 +13,11 @@ class Players {
 
     init(){
         list = [Player]()
+        
+        let player1 = Player(name: "Player 1", points: [Int](), rounds: [Int](), marker: SquareVal.X)
+        let player2 = Player(name: "Player 2", points: [Int](), rounds: [Int](), marker: SquareVal.O)
+        self.addPlayer(player: player1)
+        self.addPlayer(player: player2)
     }
     
     func addPlayer(player: Player){

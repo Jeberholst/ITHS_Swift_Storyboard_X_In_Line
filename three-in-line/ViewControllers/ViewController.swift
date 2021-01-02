@@ -8,8 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    var gaming = Gaming()
 
     override func viewDidLoad() {
         super.viewDidLoad()

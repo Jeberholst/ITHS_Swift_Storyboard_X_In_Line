@@ -11,7 +11,6 @@ class GameSettings {
     
     var listOfPlayers = Array<Player>()
     var rounds = 0
-    //var squares = [1...9]
     
     func addPlayersToList(player: Player){
         listOfPlayers.append(player)
@@ -19,10 +18,6 @@ class GameSettings {
     
     func setRounds(rounds: Int){
         self.rounds = rounds
-    }
-    
-    func addComputerBot(){
-        
     }
     
 }
