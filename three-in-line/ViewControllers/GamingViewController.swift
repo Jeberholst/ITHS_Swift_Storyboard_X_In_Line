@@ -11,12 +11,9 @@ class GamingViewController: UIViewController {
 
     private let userDefaultsSelectedColumn = "gameModeSelectedColumns"
     
+    var gamingSettings = GameSettings()
     var squares = Squares()
     var players = Players()
-    var currentPlayer: Player? = nil
-    var round = 0
-    var isBoardFull: Bool = false
-    var isPlayerWin: Bool = false
     
     @IBOutlet weak var squaresContainer: UIView!
     
@@ -36,24 +33,27 @@ class GamingViewController: UIViewController {
         onNextRound()
     }
     
-    var xy = 0
-    var yx = 0
-    var squareSize = 0
-    var selSquare: Square? = nil
-    var squareList: [Square] = []
-    
-    var turn = 0
+    private var currentPlayer: Player? = nil
+    private var isBoardFull: Bool = false
+    private var isPlayerWin: Bool = false
+    private var xy = 0
+    private var yx = 0
+    private var squareSize = 0
+    private var selSquare: Square? = nil
+    private var squareList: [Square] = []
+    private var round = 0
+    private var turn = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         squares.setColumns(columns: getSelectedGameMode())
         squareList = squares.getList()
-        increaseRound()
+        nextRound()
         hideShowBtnNextRound(hidden: true)
         initialPlayerSetup()
         squareSize = squares.calculateSquareSize(containerViewWidth: Int(squaresContainer.bounds.width) - (squares.columns * 5))
         changeTurn()
-        createViews()
+        createUIViews()
         squares.calcWinLines()
     }
     
@@ -64,21 +64,21 @@ class GamingViewController: UIViewController {
     
     func initialPlayerSetup(){
         players.setResetAllSelections(count: squares.totSquares)
-        UIupdatePlayerPoints()
-        UIupdatePlayerNames()
+        updateUIPlayerPoints()
+        updateUIPlayerNames()
     }
     
-    func UIupdatePlayerPoints(){
+    func updateUIPlayerPoints(){
         playerPointsLabels[0].text = String(players.getList()[0].pointsTotal())
         playerPointsLabels[1].text = String(players.getList()[1].pointsTotal())
     }
     
-    func UIupdatePlayerNames(){
-        playerNameLabels[0].text = players.getList()[0].name
-        playerNameLabels[1].text = players.getList()[1].name
+    func updateUIPlayerNames(){
+        playerNameLabels[0].text = players.getPlayerName(index: 0)
+        playerNameLabels[1].text = players.getPlayerName(index: 1)
     }
     
-    func createViews(){
+    func createUIViews(){
 
         let cols = squares.columns
         
@@ -95,7 +95,7 @@ class GamingViewController: UIViewController {
         }
     }
     
-    func resetLabelSquares(){
+    func resetUILabelSquares(){
         for item in squares.getList() {
             let findLbl = self.view.viewWithTag(item.index) as? UILabel
             if let findLbl = findLbl {
@@ -161,17 +161,13 @@ class GamingViewController: UIViewController {
                     onWin()
                 }
             }
-            
             changeTurn()
         }
     }
     
     func changeTurn(){
-        if(turn == 0){
-            turn = 1
-        }else{
-            turn = 0
-        }
+        gamingSettings.changeTurn()
+        turn = gamingSettings.turn
         setCurrentPlayer()
         setBackgroundColorActivePlayer()
     }
@@ -185,31 +181,24 @@ class GamingViewController: UIViewController {
         let turnStackNot = playerVerticalStacks[calcNonTurn()]
         let turnStack = playerVerticalStacks[turn]
 
-        turnStackNot.subviews.forEach{ v in
+        turnStackNot.subviews.forEach { v in
             let view = v as? UILabel
             view?.textColor = UIColor.systemGray4
         }
         
-        turnStack.subviews.forEach{ v in
+        turnStack.subviews.forEach { v in
             let view = v as? UILabel
             view?.textColor = UIColor.black
         }
     }
     
     func calcNonTurn() -> Int {
-        switch turn {
-        case 0:
-            return 1
-        case 1:
-            return 0
-        default:
-            return 0
-        }
+        return gamingSettings.calcNonTurn()
     }
     
     func onWin(){
         currentPlayer?.addPointAndCurrRound(point: 1, currRound: round)
-        UIupdatePlayerPoints()
+        updateUIPlayerPoints()
         disableInput()
         displayWin()
     }
@@ -242,14 +231,15 @@ class GamingViewController: UIViewController {
     
     func onNextRound(){
         squares.resetBoard()
-        resetLabelSquares()
+        resetUILabelSquares()
         players.setResetAllSelections(count: squares.totSquares)
         enableInput()
-        increaseRound()
+        nextRound()
     }
     
-    func increaseRound(){
-        round += 1
+    func nextRound(){
+        gamingSettings.increaseRound()
+        round = gamingSettings.round
         viewFadeOutIn(lbl: lblRound, setText: "Round \(round)")
     }
     
@@ -262,19 +252,19 @@ class GamingViewController: UIViewController {
     }
     
     func viewFadeIn(view: UIView){
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             view.alpha = 1.0
         })
     }
     
     func viewFadeOutIn(lbl: UILabel, setText: String){
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             lbl.alpha = 0.0
         }, completion: {_ in
             
             lbl.text = setText
             
-            UIView.animate(withDuration: 1.0, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 lbl.alpha = 1.0
             }, completion: { _ in
                 
@@ -294,12 +284,12 @@ class GamingViewController: UIViewController {
         
         alertUI.addTextField{ textField in
             //textField.placeholder = "Name of Player 1"
-            textField.text = self.players.getList()[0].name
+            textField.text = self.players.getPlayerName(index: 0)
             textField.autocapitalizationType = .words
         }
         alertUI.addTextField{ textField in
             //textField.placeholder = "Name of Player 2"
-            textField.text = self.players.getList()[1].name
+            textField.text = self.players.getPlayerName(index: 1)
             textField.autocapitalizationType = .words
         }
         
@@ -310,10 +300,10 @@ class GamingViewController: UIViewController {
             guard let name1 = tf1.text else { return }
             guard let name2 = tf2.text else { return }
             
-            self.players.getList()[0].name = name1
-            self.players.getList()[1].name = name2
-
-            self.UIupdatePlayerNames()
+            self.players.updatePlayerName(index: 0, newName: name1)
+            self.players.updatePlayerName(index: 1, newName: name2)
+        
+            self.updateUIPlayerNames()
         }
         
         alertUI.addAction(UIAlertAction(title: "Cancel", style: .cancel))

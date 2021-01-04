@@ -28,6 +28,18 @@ class Players {
         return self.list
     }
     
+    func getPlayerName(index: Int) -> String {
+        return list[index].name
+    }
+    
+    func updatePlayerName(index: Int, newName: String) {
+        list[index].name = newName
+    }
+    
+    func getPlayerPoint(index: Int) -> String {
+        return String(list[index].pointsTotal())
+    }
+    
     func setResetAllSelections(count: Int){
         for player in list {
             player.setResetSelectionSize(count: count)

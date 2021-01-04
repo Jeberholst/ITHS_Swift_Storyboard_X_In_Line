@@ -8,16 +8,31 @@
 import Foundation
 
 class GameSettings {
+  
+    var turn: Int = 0
+    var round: Int = 0
     
-    var listOfPlayers = Array<Player>()
-    var rounds = 0
-    
-    func addPlayersToList(player: Player){
-        listOfPlayers.append(player)
+    func changeTurn(){
+        if self.turn == 0 {
+            self.turn = 1
+        }else{
+            self.turn = 0
+        }
     }
     
-    func setRounds(rounds: Int){
-        self.rounds = rounds
+    func calcNonTurn() -> Int {
+        switch turn {
+        case 0:
+            return 1
+        case 1:
+            return 0
+        default:
+            return 0
+        }
+    }
+    
+    func increaseRound(){
+        self.round += 1
     }
     
 }
