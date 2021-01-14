@@ -26,14 +26,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZM-cD-EVM">
-                                <rect key="frame" x="57" y="345" width="312" height="216"/>
+                                <rect key="frame" x="57" y="345" width="300" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="3uu-S1-5xH"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="hOo-Pd-i9C"/>
                                 </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJ7-W3-DHW">
-                                <rect key="frame" x="71" y="677" width="272" height="50"/>
+                                <rect key="frame" x="57" y="677" width="300" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Zfe-vp-ZHJ"/>
                                 </constraints>
@@ -49,11 +49,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qJ7-W3-DHW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="508-Q1-h52"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qJ7-W3-DHW" secondAttribute="trailing" constant="71" id="Gym-Hf-2qV"/>
+                            <constraint firstItem="qJ7-W3-DHW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="57" id="508-Q1-h52"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qJ7-W3-DHW" secondAttribute="trailing" constant="57" id="Gym-Hf-2qV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qJ7-W3-DHW" secondAttribute="bottom" constant="86" id="OAR-zJ-eRs"/>
                             <constraint firstItem="9ZM-cD-EVM" firstAttribute="top" secondItem="Cfy-Q7-6Yf" secondAttribute="bottom" constant="154.5" id="aob-WY-TV7"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9ZM-cD-EVM" secondAttribute="trailing" constant="45" id="c4L-C2-uJI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9ZM-cD-EVM" secondAttribute="trailing" constant="57" id="c4L-C2-uJI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Cfy-Q7-6Yf" secondAttribute="trailing" constant="57" id="fQf-6S-8oo"/>
                             <constraint firstItem="Cfy-Q7-6Yf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="57" id="g6Y-tn-iSR"/>
                             <constraint firstItem="Cfy-Q7-6Yf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="57" id="jrt-pc-fQ7"/>
@@ -121,7 +121,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="DrG-21-8Kr"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <state key="normal" title="Next Round">
                                     <color key="titleColor" systemColor="systemPurpleColor"/>
                                 </state>
@@ -149,7 +149,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="k0U-WE-cif" userLabel="Player1VerticalStack">
-                                <rect key="frame" x="39" y="219" width="125" height="91"/>
+                                <rect key="frame" x="32" y="219" width="125" height="91"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kf-Uj-Cja">
                                         <rect key="frame" x="0.0" y="0.0" width="125" height="42"/>
@@ -203,6 +203,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="RJB-dv-Apd" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="295" id="4po-0f-3et"/>
+                            <constraint firstItem="pQD-pe-4ab" firstAttribute="trailing" secondItem="RJB-dv-Apd" secondAttribute="trailing" constant="82" id="BbU-hz-jk9"/>
                             <constraint firstItem="r9t-7g-fKv" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="57" id="DIy-90-G4p"/>
                             <constraint firstItem="rQK-hx-ksj" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="57" id="Ees-UB-uE2"/>
                             <constraint firstItem="k0U-WE-cif" firstAttribute="top" secondItem="rQK-hx-ksj" secondAttribute="bottom" constant="28.5" id="H8h-E0-qgg"/>
@@ -210,7 +211,7 @@
                             <constraint firstItem="rQK-hx-ksj" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="57" id="L42-ZT-Vf3"/>
                             <constraint firstItem="ZPV-ip-tsf" firstAttribute="top" secondItem="rQK-hx-ksj" secondAttribute="bottom" constant="28.5" id="QuX-c6-2lD"/>
                             <constraint firstItem="FUp-0F-Z1B" firstAttribute="top" secondItem="pQD-pe-4ab" secondAttribute="top" constant="8" id="cy0-Oo-rIk"/>
-                            <constraint firstItem="k0U-WE-cif" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="39" id="dbS-dD-Wd0"/>
+                            <constraint firstItem="k0U-WE-cif" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="32" id="dbS-dD-Wd0"/>
                             <constraint firstItem="pQD-pe-4ab" firstAttribute="trailing" secondItem="r9t-7g-fKv" secondAttribute="trailing" constant="57" id="eYK-Vt-Mxy"/>
                             <constraint firstItem="RJB-dv-Apd" firstAttribute="leading" secondItem="pQD-pe-4ab" secondAttribute="leading" constant="82" id="hgO-h6-KKX"/>
                             <constraint firstItem="pQD-pe-4ab" firstAttribute="trailing" secondItem="rQK-hx-ksj" secondAttribute="trailing" constant="57" id="hrk-CD-gyl"/>
@@ -244,7 +245,7 @@
             </objects>
             <point key="canvasLocation" x="387" y="-94"/>
         </scene>
-        <!-- Title-->
+        <!--View Controller-->
         <scene sceneID="h03-qx-gzT">
             <objects>
                 <viewController id="jV8-Ji-SuI" sceneMemberID="viewController">
@@ -300,8 +301,8 @@
                             <constraint firstItem="mUb-fe-Ame" firstAttribute="trailing" secondItem="jbg-dA-crb" secondAttribute="trailing" constant="57" id="wqN-hb-l6v"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title=" Title" id="F6V-cH-VUl">
-                        <barButtonItem key="backBarButtonItem" title="Front" id="i6J-dd-nGQ"/>
+                    <navigationItem key="navigationItem" id="F6V-cH-VUl">
+                        <barButtonItem key="backBarButtonItem" title="Start" id="i6J-dd-nGQ"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jqe-Rq-tja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
